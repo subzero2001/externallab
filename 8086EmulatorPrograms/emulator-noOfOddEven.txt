@@ -1,0 +1,25 @@
+Data Segment
+A DB 03H,07H,02H,04H,09H,08H,22H,29H,33H
+Even DB 00H
+Odd DB 00H
+Data Ends
+Code Segment
+Assume CS:Code, DS:Data
+Start:
+    MOV AX,Data
+    MOV DS,AX
+    LEA SI,A
+    MOV BL,00H
+    MOV BH,00H
+Back:   MOV AL,[SI]
+        ROR AL,1
+        JC Skip
+        INC BL
+Skip:   INC BH
+        INC SI
+        Loop Back
+        MOV Even,BL
+        MOV Odd,BH
+INT 03H
+Code Ends
+End Start

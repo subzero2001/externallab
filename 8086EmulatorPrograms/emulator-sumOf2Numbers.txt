@@ -1,0 +1,20 @@
+Data Segment
+a dw 0ffffH
+b dw 00001H
+sum dw ?
+carry db 00H
+data ends
+
+code Segment
+Assume cs:code, ds:data
+Start:
+    MOV AX,data
+    MOV DS,AX
+    MOV AX,A
+    ADD AX,B
+    JNC Skip
+    INC carry
+Skip:MOV SUM,AX
+    INT 03H
+    Code ends
+End Start

@@ -1,0 +1,21 @@
+Data Segment
+arr DB 02H,03H,01H,00H,05H
+largest DB 00H
+Data Ends
+Code Segment
+Assume CS:Code, DS:Data
+Start:
+MOV AX,Data
+MOV DS,AX
+LEA SI,arr
+MOV CX,05H
+MOV AL,00H
+back:   Comp AL,[SI]
+        JNC Skip
+        MOV AL,[SI]
+skip:   INC SI
+        Loop back
+MOV [SI],AL
+INT 03H
+Code Ends
+End Start

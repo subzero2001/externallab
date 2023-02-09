@@ -1,0 +1,32 @@
+Data Segment
+String1 DB 23H,34H,63H,77H,34H,23H
+Pal DB 00H
+Data Ends
+Extra Segment 
+string2 DB 07H  dup(?)
+Extra ends
+Code Segment
+Assume CS:Code, DS:Data, ES:Extra
+Start:
+    MOV AX,Data
+    MOV DS,AX
+    MOV AX,Extra
+    MOV ES,AX
+    LEA SI, String1
+    LEA DI, string2+06H
+    MOV CX,07H
+    Back:   CLD
+            LODSB
+            STD
+            STOSB
+            Loop Back
+    LEA SI, String1
+    LEA DI, string2
+    MOV CX, 07H
+        CLD
+    REPE CMPSB
+    JNZ Skip
+    MOV Pal,01H
+    Skip: INT 03H
+    Code Ends
+End Start 

@@ -1,0 +1,22 @@
+Data Segment
+arr db 01H,02H,03H,04H,05H
+sum dw 0000H
+carry db 00H
+Data Ends
+Code Segment
+Assume CS:Code, DS:Data
+Start:
+MOV AX, Data
+MOV DS, AX
+MOV AX,0000H
+MOV CX,05H
+LEA SI,arr
+back:   ADD AL,[SI]
+        INC SI
+        Loop back
+JNC Skip
+INC carry
+Skip: MOV sum,AX
+INT 03H
+Code Ends
+End Start
